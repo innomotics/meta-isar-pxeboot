@@ -1,0 +1,8 @@
+#!ipxe
+
+set server_ip ${PXESERVER_IP}
+set base http://${server_ip}/bootfiles
+kernel ${base}/vmlinuz
+initrd ${base}/initrd.img
+imgargs vmlinuz console=tty1 ${PXESERVER_LIVE_INSTALLER_ADDITIONAL_KERNEL_CMDLINE}
+boot

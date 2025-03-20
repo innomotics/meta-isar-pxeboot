@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+if [ -e /etc/nginx/sites-enabled/default ];
+then
+    rm /etc/nginx/sites-enabled/default
+fi
+
+ln -s /etc/nginx/sites-available/bootfiles.conf /etc/nginx/sites-enabled/bootfiles.conf
+
+#DEBHELPER#

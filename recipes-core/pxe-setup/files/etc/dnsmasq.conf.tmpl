@@ -1,0 +1,23 @@
+dhcp-range=${PXESERVER_DHCP_RANGE_START},${PXESERVER_DHCP_RANGE_END},6h
+
+# To filter client architectues one can use the codes specified in RFC4578
+# https://datatracker.ietf.org/doc/html/rfc4578#section-2.1
+# dhcp-match=set:efi-x86_64,option:client-arch,7
+# dhcp-match=set:efi-x86_64,option:client-arch,9
+# dhcp-match=set:efi-x86,option:client-arch,6
+# dhcp-match=set:bios,option:client-arch,0
+# dhcp-boot=tag:efi-x86_64,efi64/syslinux.efi
+# dhcp-boot=tag:efi-x86,efi32/syslinux.efi
+# dhcp-boot=tag:bios,bios/lpxelinux.0
+
+# Since we are only supporting efi based systems - we don't distinguish here
+# dhcp-boot=uefi/syslinux.efi
+# dhcp-boot=uefi/ipxe.efi
+
+dhcp-boot=${PXESERVER_DHCP_BOOT_FILE}
+
+# Enable dnsmasq's built-in TFTP server
+enable-tftp
+
+# Set the root directory for files available via FTP.
+tftp-root=${PXESERVER_DHCP_TFTP_ROOT}

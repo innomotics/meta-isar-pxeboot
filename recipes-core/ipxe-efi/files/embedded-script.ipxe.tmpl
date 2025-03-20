@@ -1,0 +1,8 @@
+#!ipxe
+
+echo Waiting for DHCP response ...
+dhcp
+echo Network configured
+set bootfile_url http://${PXESERVER_IP}/bootfiles/default.ipxe
+echo Trying to load bootfile from ${bootfile_url}
+chain ${bootfile_url}

@@ -1,0 +1,10 @@
+debian-mirror/
+build*/
+/isar/
+*.bak
+.env
+workdir*/
+/.vscode/
+.idea
+*.pyc
+.kas_shell_history

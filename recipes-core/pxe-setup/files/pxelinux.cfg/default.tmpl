@@ -1,0 +1,9 @@
+UI menu.c32
+MENU TITLE Network Boot
+TIMEOUT    50
+DEFAULT live-system-bootstrapper
+
+LABEL live-system-bootstrapper
+    MENU LABEL Live-System-Bootstrapper
+    KERNEL live-system-bootstrapper/vmlinuz
+    APPEND console=tty1 initrd=live-system-bootstrapper/initrd.img ${PXESERVER_LIVE_INSTALLER_ADDITIONAL_KERNEL_CMDLINE}

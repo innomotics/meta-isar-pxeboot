@@ -1,0 +1,6 @@
+#! /bin/sh
+
+echo "/var/installer/rootfs *(ro,subtree_check,no_root_squash)" >> /etc/exports
+echo "/var/installer/data *(rw,subtree_check,no_root_squash)" >> /etc/exports
+
+tar -C /var/installer/rootfs -xf /var/installer/rootfs.tar

@@ -1,0 +1,21 @@
+#
+# Copyright (c) Siemens AG, 2025
+#
+# Authors:
+#  Alexander Heinisch <alexander.heinisch@siemens.com>
+#
+# SPDX-License-Identifier: MIT
+#
+
+header:
+  version: 14
+
+build_system: isar
+repos:
+  meta-isar-pxeboot:
+  isar:
+    url: https://github.com/ilbers/isar.git
+    commit: 09305ffad6d86fc63ec7ccb4f1aefb4ea488e9c2
+    layers:
+      meta:
+      meta-isar:

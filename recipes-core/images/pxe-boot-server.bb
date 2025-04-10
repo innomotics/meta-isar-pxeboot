@@ -20,7 +20,8 @@ IMAGE_INSTALL:append:pxe-nfsroot = " nfs-installer-rootfs"
 #   mkpasswd -m sha512crypt -R 10000
 # mkpasswd is part of the 'whois' package of Debian
 USERS += "root"
-USER_root[password] ??= "$6$rounds=10000$RXeWrnFmkY$DtuS/OmsAS2cCEDo0BF5qQsizIrq6jPgXnwv3PHqREJeKd1sXdHX/ayQtuQWVDHe0KIO0/sVH8dvQm1KthF0d/"
+USER_root[password] ??= "root"
+USER_root[flags] += "clear-text-password"
 USER_root[shell] = "/bin/bash"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}:"

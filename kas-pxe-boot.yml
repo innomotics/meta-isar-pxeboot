@@ -11,31 +11,21 @@ header:
   version: 14
   includes:
    - kas/upstream.yml
+   - kas-pxe-common.yml
 
 build_system: isar
 
 distro: debian-bookworm
 machine: vmware
+
 target:
   - mc:pxe-boot-server:pxe-boot-server
 
 local_conf_header:
-  multiconfig: |
-    PXE_TARGET_MACHINE ?= "vmware"
-    BBMULTICONFIG += "pxe-boot-server pxe-boot-installer-target installer-target"
-
-  pxe-boot-setup: |
-    OVERRIDES .= ":pxe-nfsroot"
-
-    IMAGE_FSTYPES ?= "ova wic wic.xz"
-    IMAGE_DATA_POSTFIX ?= "wic.xz"
-    PXESERVER_LIVE_INSTALLER_ADDITIONAL_KERNEL_CMDLINE:append = " installer.image.uri=/install/${IMAGE_DATA_FILE}.${IMAGE_DATA_POSTFIX} installer.target.dev=${INSTALLER_TARGET_DEV} installer.target.overwrite=OVERWRITE"
-
-  pxe-boot-config: |
-    PXESERVER_IP ?= "192.168.148.42"
-    PXESERVER_NETMASK ?= "24"
-    PXESERVER_DHCP_RANGE_START ?= "192.168.148.200"
-    PXESERVER_DHCP_RANGE_END ?= "192.168.148.250"
+  isar_bootstrapper: |
+    # Uncomment this to use old isar-bootstrap provider for rootfs prepare
+    PREFERRED_PROVIDER_bootstrap-host ?= "isar-bootstrap-host"
+    PREFERRED_PROVIDER_bootstrap-target ?= "isar-bootstrap-target"
 
   vm-settings: |
     OVA_NUMBER_OF_CPU ?= "4"
@@ -47,11 +37,6 @@ local_conf_header:
     INSTALLER_TARGET_MACHINE = "${PXE_TARGET_MACHINE}"
     IMAGE_DATA_FILE ?= "${INSTALLER_TARGET_IMAGE}-${DISTRO}-${INSTALLER_TARGET_MACHINE}"
     INSTALLER_TARGET_DEV ?= "/dev/sda"
-
-  isar_bootstrapper: |
-    # Uncomment this to use old isar-bootstrap provider for rootfs prepare
-    PREFERRED_PROVIDER_bootstrap-host ?= "isar-bootstrap-host"
-    PREFERRED_PROVIDER_bootstrap-target ?= "isar-bootstrap-target"
 
   snapshot: |
     ISAR_USE_APT_SNAPSHOT = "1"

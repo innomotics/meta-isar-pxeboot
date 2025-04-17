@@ -1,0 +1,29 @@
+#
+# Copyright (c) Siemens AG, 2025
+#
+# Authors:
+#  Alexander Heinisch <alexander.heinisch@siemens.com>
+#
+# SPDX-License-Identifier: MIT
+#
+
+header:
+  version: 14
+
+local_conf_header:
+  multiconfig: |
+    PXE_TARGET_MACHINE ?= "vmware"
+    BBMULTICONFIG += "pxe-boot-server pxe-boot-installer-target installer-target"
+
+  pxe-boot-setup: |
+    OVERRIDES .= ":pxe-nfsroot"
+
+    IMAGE_FSTYPES ?= "ova wic wic.xz"
+    IMAGE_DATA_POSTFIX ?= "wic.xz"
+    PXESERVER_LIVE_INSTALLER_ADDITIONAL_KERNEL_CMDLINE:append = " installer.image.uri=/install/${IMAGE_DATA_FILE}.${IMAGE_DATA_POSTFIX} installer.target.dev=${INSTALLER_TARGET_DEV} installer.target.overwrite=OVERWRITE"
+
+  pxe-boot-config: |
+    PXESERVER_IP ?= "192.168.148.42"
+    PXESERVER_NETMASK ?= "24"
+    PXESERVER_DHCP_RANGE_START ?= "192.168.148.200"
+    PXESERVER_DHCP_RANGE_END ?= "192.168.148.250"

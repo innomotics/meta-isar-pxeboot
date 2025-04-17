@@ -16,6 +16,11 @@ dhcp-range=${PXESERVER_DHCP_RANGE_START},${PXESERVER_DHCP_RANGE_END},6h
 
 dhcp-boot=${PXESERVER_DHCP_BOOT_FILE}
 
+# Disable automatic assignment of default gateway on PXE clients
+dhcp-option=3
+# Disable DNS as it is not required
+dhcp-option=6
+
 # Enable dnsmasq's built-in TFTP server
 enable-tftp
 

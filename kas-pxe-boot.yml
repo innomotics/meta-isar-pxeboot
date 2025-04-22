@@ -12,11 +12,11 @@ header:
     - kas/common/kas-pxe-boot-server-common.yml
     - kas/common/kas-installer-target-common.yml
 
-machine: vmware
+machine: qemuamd64
 target: mc:pxe-boot-server:pxe-boot-server
 
 build_system: isar
 
 local_conf_header:
   pxe-target-machine: |
-    PXE_TARGET_MACHINE ??= "vmware"
+    PXE_TARGET_MACHINE ??= "qemuamd64"

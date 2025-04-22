@@ -60,7 +60,10 @@ endif
 
 choice
 	prompt "Select PXE server machine"
-	default PXE_SERVER_VIRTUALBOX
+	default PXE_SERVER_QEMU_AMD64
+
+config PXE_SERVER_QEMU_AMD64
+	bool "QEMU_AMD64"
 
 config PXE_SERVER_VIRTUALBOX
 	bool "VirtualBox"
@@ -72,6 +75,7 @@ endchoice
 
 config KAS_INCLUDE_PXE_SERVER_MACHINE
 	string
+	default "kas/pxe-server-machine/qemuamd64.yml" if PXE_SERVER_QEMU_AMD64
 	default "kas/pxe-server-machine/virtualbox.yml" if PXE_SERVER_VIRTUALBOX
 	default "kas/pxe-server-machine/vmware.yml" if PXE_SERVER_VMWARE
 
@@ -123,7 +127,10 @@ config KAS_INCLUDE_PXE_SERVER_PACKAGES
 
 choice
 	prompt "Select Target Machine"
-	default TARGET_MACHINE_X86_PC
+	default TARGET_MACHINE_QEMU_AMD64
+
+config TARGET_MACHINE_QEMU_AMD64
+	bool "QEMU_AMD64"
 
 config TARGET_MACHINE_X86_PC
 	bool "x86 PC (x86-64)"
@@ -138,6 +145,7 @@ endchoice
 
 config KAS_INCLUDE_TARGET_MACHINE
 	string
+	default "kas/pxe-target-machine/qemuamd64.yml" if TARGET_MACHINE_QEMU_AMD64
 	default "kas/pxe-target-machine/x86-pc.yml" if TARGET_MACHINE_X86_PC
 	default "kas/pxe-target-machine/virtualbox.yml" if TARGET_MACHINE_VIRTUALBOX
 	default "kas/pxe-target-machine/vmware.yml" if TARGET_MACHINE_VMWARE

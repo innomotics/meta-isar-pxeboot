@@ -11,3 +11,4 @@ local_conf_header:
   vm-settings: |
     OVA_NUMBER_OF_CPU ?= "4"
     OVA_MEMORY ?= "4096"
+    PXESERVER_INTERFACE_NAMES ?= "e*"

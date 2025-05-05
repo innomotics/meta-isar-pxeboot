@@ -91,6 +91,10 @@ config OVA_MEMORY
 	string "RAM allocated to VM in MiB"
 	default "4096"
 
+config PXESERVER_INTERFACE_NAMES
+	string "Server's interfaces for target devices"
+	default "e*"
+
 config PXE_SERVER_ROOT_USER
 	bool "Enable 'root' user"
 	default y

@@ -18,6 +18,7 @@ DEPENDS:remove:pxe-syslinux = " ipxe-efi ipxe-bootfiles-http-server"
 DEBIAN_DEPENDS += "dnsmasq, ipxe-efi, ipxe-bootfiles-http-server"
 DEPENDS:remove:pxe-syslinux = "ipxe-efi, ipxe-bootfiles-http-server"
 
+PXESERVER_INTERFACE_NAMES ?= "e*"
 PXESERVER_IP ?= "192.168.148.42"
 PXESERVER_NETMASK ?= "24"
 PXESERVER_DHCP_RANGE_START ?= "192.168.148.200"
@@ -29,6 +30,7 @@ PXESERVER_DHCP_BOOT_FILE:pxe-syslinux ?= "uefi/syslinux.efi"
 PXESERVER_LIVE_INSTALLER_ADDITIONAL_KERNEL_CMDLINE ?= ""
 
 TEMPLATE_VARS = "\
+    PXESERVER_INTERFACE_NAMES \
     PXESERVER_IP \
     PXESERVER_NETMASK \
     PXESERVER_DHCP_RANGE_START \

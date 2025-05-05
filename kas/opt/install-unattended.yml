@@ -1,0 +1,16 @@
+#
+# Copyright (c) Siemens AG, 2025
+#
+# SPDX-License-Identifier: MIT
+#
+
+header:
+  version: 14
+
+local_conf_header:
+  unattended-install: |
+    INSTALLER_TARGET_MACHINE ?= "${PXE_TARGET_MACHINE}"
+    IMAGE_DATA_FILE ??= "${INSTALLER_TARGET_IMAGE}-${DISTRO}-${INSTALLER_TARGET_MACHINE}"
+    IMAGE_DATA_POSTFIX ??= "wic.zst"
+    INSTALLER_TARGET_DEV ?= "/dev/sda:/dev/nvme0n1"
+    PXESERVER_LIVE_INSTALLER_ADDITIONAL_KERNEL_CMDLINE:append = " installer.image.uri=/install/${IMAGE_DATA_FILE}.${IMAGE_DATA_POSTFIX} installer.target.dev=${INSTALLER_TARGET_DEV} installer.target.overwrite=OVERWRITE"

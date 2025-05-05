@@ -1,0 +1,13 @@
+#
+# Copyright (c) Siemens AG, 2025
+#
+# SPDX-License-Identifier: MIT
+#
+
+header:
+  version: 14
+
+local_conf_header:
+  extra-packages-installer-target: |
+    KAS_INSTALLER_TARGET_PREINSTALL ??= "iproute2 iputils-ping dhcpcd-base network-manager"
+    IMAGE_PREINSTALL:append:pn-${INSTALLER_TARGET_IMAGE} = " ${KAS_INSTALLER_TARGET_PREINSTALL}"

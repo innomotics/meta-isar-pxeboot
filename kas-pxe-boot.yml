@@ -1,47 +1,22 @@
 #
 # Copyright (c) Siemens AG, 2025
 #
-# Authors:
-#  Alexander Heinisch <alexander.heinisch@siemens.com>
-#
 # SPDX-License-Identifier: MIT
 #
 
 header:
   version: 14
   includes:
-   - kas/upstream.yml
-   - kas-pxe-common.yml
+    - kas/distro/bookworm.yml
+    - kas/common/base.yml
+    - kas/common/kas-pxe-boot-server-common.yml
+    - kas/common/kas-installer-target-common.yml
+
+machine: vmware
+target: mc:pxe-boot-server:pxe-boot-server
 
 build_system: isar
 
-distro: debian-bookworm
-machine: vmware
-
-target:
-  - mc:pxe-boot-server:pxe-boot-server
-
 local_conf_header:
-  isar_bootstrapper: |
-    # Uncomment this to use old isar-bootstrap provider for rootfs prepare
-    PREFERRED_PROVIDER_bootstrap-host ?= "isar-bootstrap-host"
-    PREFERRED_PROVIDER_bootstrap-target ?= "isar-bootstrap-target"
-
-  vm-settings: |
-    OVA_NUMBER_OF_CPU ?= "4"
-    OVA_MEMORY ?= "5140"
-
-  pxe-boot-target-setup: |
-    PXESERVER_LIVE_INSTALLER_IMAGE ?= "isar-image-installer"
-    INSTALLER_TARGET_IMAGE ?= "isar-image-base"
-    INSTALLER_TARGET_MACHINE = "${PXE_TARGET_MACHINE}"
-    IMAGE_DATA_FILE ?= "${INSTALLER_TARGET_IMAGE}-${DISTRO}-${INSTALLER_TARGET_MACHINE}"
-    INSTALLER_TARGET_DEV ?= "/dev/sda"
-
-  snapshot: |
-    ISAR_USE_APT_SNAPSHOT = "1"
-    ISAR_APT_SNAPSHOT_DATE = "${DEBIAN_SNAPSHOT}"
-
-env:
-  PXE_TARGET_MACHINE:
-  DEBIAN_SNAPSHOT: "20250213T084515Z"
+  pxe-target-machine: |
+    PXE_TARGET_MACHINE ??= "vmware"

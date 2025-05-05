@@ -1,0 +1,15 @@
+#
+# Copyright (c) Siemens AG, 2025
+#
+# SPDX-License-Identifier: MIT
+#
+
+header:
+  version: 14
+  includes:
+    - kas-pxe-boot.yml
+    - kas/pxe-server-machine/vmware.yml
+    - kas/pxe-target-machine/x86-pc.yml
+    - kas/opt/install-unattended.yml
+
+build_system: isar

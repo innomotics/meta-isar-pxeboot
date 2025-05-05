@@ -1,0 +1,21 @@
+#
+# Copyright (c) Siemens AG, 2025
+#
+# SPDX-License-Identifier: MIT
+#
+
+header:
+  version: 14
+  includes:
+    - kas/opt/vm-settings.yml
+    - kas/opt/user-setup-pxe-server.yml
+    - kas/opt/extra-packages-pxe-server.yml
+
+target: mc:pxe-boot-server:pxe-boot-server
+
+local_conf_header:
+  pxe-boot-server-overrides: |
+    OVERRIDES .= ":pxe-nfsroot"
+
+  pxe-boot-server-multiconfig:
+    BBMULTICONFIG += "pxe-boot-server"

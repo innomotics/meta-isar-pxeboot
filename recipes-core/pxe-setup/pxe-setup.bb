@@ -89,8 +89,11 @@ PXESERVER_LIVE_INSTALLER_FILE_NAME ??= "${PXESERVER_LIVE_INSTALLER_IMAGE}-${PXES
 
 PXESERVER_LIVE_INSTALLER_DESTINATION_BOOTSTRAPPER ??= "${PXESERVER_DHCP_TFTP_ROOT}/uefi/live-system-bootstrapper/"
 
-# Note: bitbake does not support override syntax on variable flag - so this dependency will always be enforced!
-do_install[mcdepends] = "mc:${PXESERVER_MC}:${PXESERVER_LIVE_INSTALLER_MC}:${PXESERVER_LIVE_INSTALLER_IMAGE}:do_copy_boot_files"
+INSTALLER_IMAGE_DEPENDS ??= "mc:${PXESERVER_MC}:${PXESERVER_LIVE_INSTALLER_MC}:${PXESERVER_LIVE_INSTALLER_IMAGE}:do_copy_boot_files"
+
+do_install[mcdepends] = "${INSTALLER_IMAGE_DEPENDS}"
+
+
 do_install:append:pxe-syslinux() {
 
     install -v -m 644 ${WORKDIR}/syslinux-6.03/efi64/efi/syslinux.efi ${D}/${PXESERVER_DHCP_TFTP_ROOT}/uefi/

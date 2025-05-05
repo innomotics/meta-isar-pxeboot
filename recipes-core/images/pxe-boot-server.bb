@@ -15,15 +15,6 @@ DESCRIPTION = "PXE Boot VM used to bootstrap online installer"
 IMAGE_INSTALL += "pxe-setup"
 IMAGE_INSTALL:append:pxe-nfsroot = " nfs-installer-rootfs"
 
-# Set root password to 'root'
-# Password was encrypted using following command:
-#   mkpasswd -m sha512crypt -R 10000
-# mkpasswd is part of the 'whois' package of Debian
-USERS += "root"
-USER_root[password] ??= "root"
-USER_root[flags] += "clear-text-password"
-USER_root[shell] = "/bin/bash"
-
 FILESEXTRAPATHS:prepend := "${THISDIR}:"
 
 
@@ -33,3 +24,7 @@ IMAGE_PREINSTALL += " \
 # Nice to have packages (debug)
 IMAGE_PREINSTALL += " \
     iproute2 iputils-ping procps"
+
+require ${@bb.utils.contains('ENABLE_ROOT_USER_PXE_SERVER', '1', 'user-setup-root.inc', '', d)}
+
+CUSTOMIZATIONS += "hostname"

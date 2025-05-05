@@ -27,3 +27,6 @@ local_conf_header:
 
   enable-pn-overrides: |
     OVERRIDES .= ":pn-${PN}"
+
+  default-hostname: |
+    HOSTNAME ??= "${MACHINE}"

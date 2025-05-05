@@ -1,0 +1,174 @@
+#
+# Copyright (c) Siemens AG, 2025
+#
+# SPDX-License-Identifier: MIT
+#
+
+mainmenu "PXE Setup"
+
+config KAS_INCLUDE_MAIN
+	string
+	default "kas-pxe-boot.yml"
+
+config KAS_BUILD_SYSTEM
+	string
+	default "isar"
+
+choice
+	prompt "Select Debian version"
+	default DEBIAN_BOOKWORM
+
+config DEBIAN_BOOKWORM
+	bool "12 (bookworm)"
+
+config DEBIAN_TRIXIE
+	bool "13 (trixie)"
+
+endchoice
+
+config KAS_INCLUDE_DISTRO_DEBIAN_BOOKWORM
+	string
+	default "kas/distro/bookworm.yml" if DEBIAN_BOOKWORM
+
+config KAS_INCLUDE_DISTRO_DEBIAN_TRIXIE
+	string
+	default "kas/distro/trixie.yml" if DEBIAN_TRIXIE
+
+choice
+	prompt "Debian Package feeds"
+	default USE_UPSTREAM_FEEDS
+
+config USE_UPSTREAM_FEEDS
+	bool "deb.debian.org"
+
+config USE_SNAPSHOT_FEEDS
+	bool "snapshot.debian.org"
+
+endchoice
+
+if USE_SNAPSHOT_FEEDS
+
+config DEBIAN_SNAPSHOT
+	string "Debian snapshot timestamp"
+	default "20250507T083647Z"
+
+config KAS_INCLUDE_USE_DEBIAN_SNAPSHOT
+	string
+	default "kas/opt/use-debian-snapshot.yml"
+
+endif
+
+choice
+	prompt "Select PXE server machine"
+	default PXE_SERVER_VIRTUALBOX
+
+config PXE_SERVER_VIRTUALBOX
+	bool "VirtualBox"
+
+config PXE_SERVER_VMWARE
+	bool "VMware"
+
+endchoice
+
+config KAS_INCLUDE_PXE_SERVER_MACHINE
+	string
+	default "kas/pxe-server-machine/virtualbox.yml" if PXE_SERVER_VIRTUALBOX
+	default "kas/pxe-server-machine/vmware.yml" if PXE_SERVER_VMWARE
+
+if PXE_SERVER_VIRTUALBOX || PXE_SERVER_VMWARE
+
+comment "Customize PXE Server Image"
+
+config KAS_INCLUDE_PXE_SERVER_VM_SETTINGS
+	string
+	default "kas/opt/vm-settings.yml"
+
+config OVA_NUMBER_OF_CPU
+	string "CPUs allocated to VM"
+	default "4"
+
+config OVA_MEMORY
+	string "RAM allocated to VM in MiB"
+	default "4096"
+
+config PXE_SERVER_ROOT_USER
+	bool "Enable 'root' user"
+	default y
+
+config KAS_PXE_SERVER_IMAGE_PREINSTALL
+	string "Additional packages"
+	default "dhcpcd-base network-manager"
+
+endif
+
+if PXE_SERVER_ROOT_USER
+
+config KAS_INCLUDE_PXE_SERVER_USER_SETUP
+	string
+	default "kas/opt/user-setup-pxe-server.yml"
+
+config ENABLE_ROOT_USER_PXE_SERVER
+	string
+	default "1" if PXE_SERVER_ROOT_USER
+
+endif
+
+config KAS_INCLUDE_PXE_SERVER_PACKAGES
+	string
+	default "kas/opt/extra-packages-pxe-server.yml"
+
+choice
+	prompt "Select Target Machine"
+	default TARGET_MACHINE_X86_PC
+
+config TARGET_MACHINE_X86_PC
+	bool "x86 PC (x86-64)"
+
+config TARGET_MACHINE_VIRTUALBOX
+	bool "VirtualBox"
+
+config TARGET_MACHINE_VMWARE
+	bool "VMware"
+
+endchoice
+
+config KAS_INCLUDE_TARGET_MACHINE
+	string
+	default "kas/pxe-target-machine/x86-pc.yml" if TARGET_MACHINE_X86_PC
+	default "kas/pxe-target-machine/virtualbox.yml" if TARGET_MACHINE_VIRTUALBOX
+	default "kas/pxe-target-machine/vmware.yml" if TARGET_MACHINE_VMWARE
+
+choice
+	prompt "Target Image to install"
+	default TARGET_IMAGE_BASE
+
+config TARGET_IMAGE_BASE
+	bool "isar-image-base"
+
+config TARGET_IMAGE_DEBUG
+	bool "isar-image-debug"
+
+endchoice
+
+config INSTALLER_TARGET_IMAGE
+	string
+	default "isar-image-base" if TARGET_IMAGE_BASE
+	default "isar-image-debug" if TARGET_IMAGE_DEBUG
+
+comment "Additional Features"
+
+config INSTALL_UNATTENDED
+	bool "Run installer unattended"
+	default y
+
+if INSTALL_UNATTENDED
+
+config KAS_INCLUDE_PXE_TARGET_INSTALL_UNATTENDED
+	string
+	default "kas/opt/install-unattended.yml"
+
+config PXE_INSTALLER_TARGET_DEVICE
+	string "Target device to deploy"
+	default "/dev/sda:/dev/nvme0n1"
+
+endif

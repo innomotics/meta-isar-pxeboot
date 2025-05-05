@@ -2,6 +2,8 @@ debian-mirror/
 build*/
 /isar/
 *.bak
+.config.yaml
+.config.yaml.old
 .env
 workdir*/
 /.vscode/

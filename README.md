@@ -36,3 +36,28 @@ To build the PXE Boot Server image (containing the target image to be executed o
 
 To improve build times by using cached upstream apt artifacts you can setup an apt cache as described in [docs/setup-build-env/apt-caching-proxy.md](docs/setup-build-env/apt-caching-proxy.md).
 
+## Test Setup
+
+1. Configure a local bridge network used for the pxe-boot setup:
+
+    ```
+    ./scripts/qemu-test/1-setup-network.sh
+    ```
+
+1. Start the pxe boot server:
+
+    ```
+    ./scripts/qemu-test/2-start-pxe-boot-server.sh
+    ```
+
+1. Start the target vm:
+
+    ```
+    ./scripts/qemu-test/3-start-target.sh
+    ```
+
+1. Once you are done testing you can remove the network setup again:
+
+    ```
+    ./scripts/qemu-test/4-remove-network.sh
+    ```

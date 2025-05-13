@@ -12,7 +12,7 @@ header:
 
 local_conf_header:
   installer-target-multiconfig: |
-    BBMULTICONFIG += "pxe-boot-installer-target installer-target"
+    BBMULTICONFIG += "pxe-boot-installer-target pxe-boot-installer"
 
   bundled-image-installer-target: |
     INSTALLER_TARGET_IMAGE ??= "isar-image-base"

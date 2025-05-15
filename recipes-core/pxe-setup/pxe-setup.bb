@@ -12,11 +12,11 @@ inherit dpkg-raw
 DESCRIPTION = "PXE Server setup to boot devices via pxe boot."
 MAINTAINER = "Alexander Heinisch <alexander.heinisch@siemens.com>"
 
-DEPENDS += " ipxe-efi ipxe-bootfiles-http-server"
-DEPENDS:remove:pxe-syslinux = " ipxe-efi ipxe-bootfiles-http-server"
+DEPENDS += "ipxe-bootfiles-http-server"
+DEPENDS:remove:pxe-syslinux = "ipxe-bootfiles-http-server"
 
-DEBIAN_DEPENDS += "dnsmasq, ipxe-efi, ipxe-bootfiles-http-server"
-DEPENDS:remove:pxe-syslinux = "ipxe-efi, ipxe-bootfiles-http-server"
+DEBIAN_DEPENDS += "dnsmasq, ipxe, ipxe-bootfiles-http-server"
+DEPENDS:remove:pxe-syslinux = "ipxe-bootfiles-http-server"
 
 PXESERVER_INTERFACE_NAMES ?= "e*"
 PXESERVER_IP ?= "192.168.148.42"
@@ -43,12 +43,14 @@ TEMPLATE_VARS = "\
 TEMPLATE_FILES = "\
     etc/dnsmasq.conf.tmpl \
     etc/systemd/network/10-main.network.tmpl \
+    ipxe/autoexec.ipxe.tmpl \
     "
 
 SRC_URI = "\
     file://preinst \
     file://postinst \
     file://etc/ \
+    file://ipxe/ \
     "
 
 # using syslinux
@@ -73,6 +75,8 @@ do_install() {
     install -v -m 644 ${WORKDIR}/etc/systemd/system/systemd-networkd-wait-online.service.d/override.conf ${D}/etc/systemd/system/systemd-networkd-wait-online.service.d/
 
     install -v -d ${D}/${PXESERVER_DHCP_TFTP_ROOT}/uefi
+
+    install -v -m 644 ${WORKDIR}/ipxe/autoexec.ipxe ${D}/${PXESERVER_DHCP_TFTP_ROOT}/
 }
 
 

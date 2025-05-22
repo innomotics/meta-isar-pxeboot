@@ -12,6 +12,9 @@ inherit image
 ISAR_RELEASE_CMD = "git -C ${LAYERDIR_meta-isar-pxeboot} describe --tags --dirty --always --match 'v[0-9].[0-9]*'"
 DESCRIPTION = "PXE Boot VM used to bootstrap online installer"
 
+IMAGE_FULLNAME .= "-${PXE_TARGET_MACHINE}"
+ROOTFS_PACKAGE_SUFFIX = "${IMAGE_FULLNAME}"
+
 IMAGE_INSTALL += "pxe-setup"
 IMAGE_INSTALL:append:pxe-nfsroot = " nfs-installer-rootfs"
 

@@ -144,7 +144,7 @@ config KAS_INCLUDE_TARGET_MACHINE
 
 choice
 	prompt "Target Image to install"
-	default TARGET_IMAGE_BASE
+	default TARGET_IMAGE_DEMO
 
 config TARGET_IMAGE_BASE
 	bool "isar-image-base"
@@ -152,12 +152,16 @@ config TARGET_IMAGE_BASE
 config TARGET_IMAGE_DEBUG
 	bool "isar-image-debug"
 
+config TARGET_IMAGE_DEMO
+	bool "pxe-boot-target-demo"
+
 endchoice
 
 config INSTALLER_TARGET_IMAGE
 	string
 	default "isar-image-base" if TARGET_IMAGE_BASE
 	default "isar-image-debug" if TARGET_IMAGE_DEBUG
+	default "pxe-boot-target-demo" if TARGET_IMAGE_DEMO
 
 comment "Additional Features"
 
@@ -174,5 +178,40 @@ config KAS_INCLUDE_PXE_TARGET_INSTALL_UNATTENDED
 config PXE_INSTALLER_TARGET_DEVICE
 	string "Target device to deploy"
 	default "/dev/sda:/dev/nvme0n1"
+
+endif
+
+if TARGET_IMAGE_DEMO
+
+config INSTALLER_TARGET_ROOT_USER
+	bool "Enable 'root' user"
+	default y
+
+if INSTALLER_TARGET_ROOT_USER
+
+config KAS_INCLUDE_INSTALLER_TARGET_USER_SETUP
+	string
+	default "kas/opt/user-setup-installer-target.yml"
+
+config ENABLE_ROOT_USER_INSTALLER_TARGET
+	string
+	default "1"
+
+endif
+
+config ENABLE_SERIAL_DEBUG_CONSOLE
+	bool "Serial Console"
+
+config KAS_INCLUDE_ENABLE_SERIAL_CONSOLE
+	string
+	default "kas/opt/serial-console.yml" if ENABLE_SERIAL_DEBUG_CONSOLE
+
+config KAS_INSTALLER_TARGET_PREINSTALL
+	string "Additional packages"
+	default "dhcpcd-base iproute2 iputils-ping network-manager"
+
+config KAS_INCLUDE_INSTALLER_TARGET_PACKAGES
+	string
+	default "kas/opt/extra-packages-installer-target.yml"
 
 endif

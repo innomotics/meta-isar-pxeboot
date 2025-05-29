@@ -12,6 +12,11 @@ header:
 
 build_system: isar
 
+defaults:
+  repos:
+    patches:
+      repo: meta-isar-pxeboot
+
 repos:
   meta-isar-pxeboot:
   isar:
@@ -20,6 +25,9 @@ repos:
     layers:
       meta:
       meta-isar:
+    patches:
+      0001:
+        path: patches/0001-isar-installer-Mount-tmp-as-tmpfs-for-read-only-boot.patch
 
 local_conf_header:
   ccache: |

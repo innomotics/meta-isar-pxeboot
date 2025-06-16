@@ -4,6 +4,14 @@
 # SPDX-License-Identifier: MIT
 #
 
+spec:
+  inputs:
+    snapshot:
+      description: "Set the snapshot date to use for debian packages (e.g.: \"20250507T083647Z\") - leave empty (\"\") to disables snapshots."
+      default: ""
+
+---
+
 variables:
   https_proxy: ${CODE_PROXY}
   http_proxy: ${CODE_PROXY}
@@ -24,8 +32,12 @@ stages:
   variables:
     GIT_STRATEGY: clone
     GIT_DEPTH: "1"
+    SNAPSHOT: $[[ inputs.snapshot ]]
   script:
-    - kas build ${TARGET}
+    - build_target="${TARGET}"
+    - if [ "$SNAPSHOT" != "" ];then build_yaml="$build_yaml:kas/opt/use-debian-snapshot.yml"; fi
+    - echo "Building ${build_target}"
+    - kas build ${build_target}
   tags:
     - privileged
 

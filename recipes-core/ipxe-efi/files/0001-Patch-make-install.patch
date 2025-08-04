@@ -1,0 +1,29 @@
+From fda5cdb5fe14ee3577fea4e4f6775248db0a02cc Mon Sep 17 00:00:00 2001
+From: Alexander Heinisch <alexander.heinisch@siemens.com>
+Date: Thu, 29 Aug 2024 13:59:20 +0200
+Subject: [PATCH] Patch make install.
+
+Signed-off-by: Alexander Heinisch <alexander.heinisch@siemens.com>
+---
+ src/Makefile | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/src/Makefile b/src/Makefile
+index 79d363c0..b3466194 100644
+--- a/src/Makefile
++++ b/src/Makefile
+@@ -203,7 +203,10 @@ configure :
+ 	@$(ECHO) "No configuration needed."
+ 
+ install :
+-	@$(ECHO) "No installation required."
++	@$(ECHO) "Install into: >$(DESTDIR)<"
++	install -v -d $(DESTDIR)/usr/lib/ipxe/
++	install -v -m 755 bin-x86_64-efi/ipxe.efi $(DESTDIR)/usr/lib/ipxe/
++
+ 
+ ###############################################################################
+ #
+-- 
+2.43.0
+

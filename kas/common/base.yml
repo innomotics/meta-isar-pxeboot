@@ -21,13 +21,10 @@ repos:
   meta-isar-pxeboot:
   isar:
     url: https://github.com/ilbers/isar.git
-    commit: b5cb27762abe662b8c5f9f8f8ee2b4ab85f9f673
+    commit: 9e62337953fbb8371c846c44e8a99d62a8d220ba
     layers:
       meta:
       meta-isar:
-    patches:
-      0001:
-        path: patches/0001-isar-installer-Mount-tmp-as-tmpfs-for-read-only-boot.patch
 
 local_conf_header:
   ccache: |

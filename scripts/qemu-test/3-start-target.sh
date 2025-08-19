@@ -112,12 +112,18 @@ QEMU_DISK=" -device ${INSTALLER_TARGET_DISK_TYPE},serial=deadbeef,drive=storage 
 
 # Create network interfaces bound to pci: enp1s0, enp2s0 and enp3s0
 TAP_IFNAME_PXE_TARGET=${TAP_IFNAME_PXE_TARGET:-"tap-pxe-target"}
+
+#IPXE_ROM_FILE="../ipxe-upstream/src/bin-x86_64-efi/ipxe.efirom"
+IPXE_ROM_FILE="" # do not use Debian qemu-ipxe prebundled rom file, as it ships with an outdated buggy version
+
 QEMU_NETWORK=" \
     -netdev tap,id=cloud,ifname=${TAP_IFNAME_PXE_TARGET},script=no,downscript=no \
     \
     -device pcie-root-port,id=pcie_port1,bus=pcie.0,chassis=1 \
     \
     -device virtio-net-pci,netdev=cloud,bus=pcie_port1 \
+    \
+    -global virtio-net-pci.romfile=${IPXE_ROM_FILE} \
     "
 
 GUEST_SWTPM_DIR=${WORKDIR}/swtpm

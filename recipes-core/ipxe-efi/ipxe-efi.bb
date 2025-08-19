@@ -27,9 +27,10 @@ SRC_URI=" \
     file://embedded-script.ipxe.tmpl \
     file://rules \
     file://0001-Patch-make-install.patch \
+    file://0001-Fixing-iteration-on-autoexec.ipxe.patch \
     "
 
-SRCREV_ipxe = "bdb5b4aef46ed34b47094652f3eefc7d0463d166"
+SRCREV_ipxe = "f7a1e9ef8e1dc22ebded786507b872a45e3fb05d"
 
 PATCHTOOL = "git"
 S = "${WORKDIR}/ipxe-src/src"

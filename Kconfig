@@ -84,6 +84,8 @@ menu "Customize PXE Server Image"
 
 if PXE_SERVER_VIRTUALBOX || PXE_SERVER_VMWARE
 
+comment "OVA Related Options"
+
 config KAS_INCLUDE_PXE_SERVER_VM_SETTINGS
 	string
 	default "kas/opt/vm-settings.yml"
@@ -97,6 +99,30 @@ config OVA_MEMORY
 	default "4096"
 
 endif
+
+choice
+	prompt "Select iPXE (http/fast) or syslinux (tftp/slow) to bootstrap installer"
+	default PXE_SERVER_IPXE_EMBEDDED
+
+config PXE_SERVER_IPXE_EMBEDDED
+	bool "iPXE - Using embedded script"
+
+config PXE_SERVER_IPXE_AUTOEXEC
+	bool "iPXE - Using autoexec script from server"
+
+config PXE_SERVER_SYSLINUX
+	bool "Syslinux"
+
+endchoice
+
+config KAS_INCLUDE_PXE_SERVER_BOOTSTRAPPER
+	string
+	default "" if PXE_SERVER_IPXE_EMBEDDED
+	default "kas/opt/use-ipxe-autoexec.yml" if PXE_SERVER_IPXE_AUTOEXEC
+	default "kas/opt/use-syslinux.yml" if PXE_SERVER_SYSLINUX
+
+
+comment "Other options"
 
 config PXESERVER_INTERFACE_NAMES
 	string "Server's interfaces for target devices"

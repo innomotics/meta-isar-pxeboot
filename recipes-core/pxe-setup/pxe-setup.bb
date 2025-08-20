@@ -45,10 +45,17 @@ TEMPLATE_FILES = "\
     etc/systemd/network/10-main.network.tmpl \
     "
 
+TEMPLATE_FILES:append:ipxe-autoexec = "\
+    ipxe/autoexec.ipxe.tmpl \
+    "
+
 SRC_URI = "\
     file://preinst \
     file://postinst \
     file://etc/ \
+    "
+SRC_URI:append:ipxe-autoexec = "\
+    file://ipxe/autoexec.ipxe.tmpl \
     "
 
 # using syslinux
@@ -73,6 +80,10 @@ do_install() {
     install -v -m 644 ${WORKDIR}/etc/systemd/system/systemd-networkd-wait-online.service.d/override.conf ${D}/etc/systemd/system/systemd-networkd-wait-online.service.d/
 
     install -v -d ${D}/${PXESERVER_DHCP_TFTP_ROOT}/uefi
+}
+
+do_install:append:ipxe-autoexec() {
+    install -v -m 644 ${WORKDIR}/ipxe/autoexec.ipxe ${D}/${PXESERVER_DHCP_TFTP_ROOT}/
 }
 
 

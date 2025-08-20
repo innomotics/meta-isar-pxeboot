@@ -15,7 +15,7 @@ target: mc:pxe-boot-server:pxe-boot-server
 
 local_conf_header:
   pxe-boot-server-overrides: |
-    OVERRIDES .= ":pxe-nfsroot"
+    OVERRIDES .= ":pxe-nfsroot:ipxe-embedded"
 
   pxe-boot-server-multiconfig:
     BBMULTICONFIG += "pxe-boot-server"

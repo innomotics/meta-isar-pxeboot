@@ -1,0 +1,14 @@
+#
+# Copyright (c) Siemens AG, 2025
+#
+# SPDX-License-Identifier: MIT
+#
+
+header:
+  version: 14
+
+local_conf_header:
+  use-syslinux: |
+    OVERRIDES:append = ":pxe-syslinux"
+    OVERRIDES:remove = ":ipxe-autoexec"
+    OVERRIDES:remove = ":ipxe-embedded"

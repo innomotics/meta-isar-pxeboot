@@ -8,3 +8,7 @@ header:
   version: 14
 
 machine: qemuamd64
+
+local_conf_header:
+  fstypes: |
+    IMAGE_FSTYPES += "wic wic.xz"

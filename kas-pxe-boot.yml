@@ -11,6 +11,7 @@ header:
     - kas/common/base.yml
     - kas/common/kas-pxe-boot-server-common.yml
     - kas/common/kas-installer-target-common.yml
+    - kas/pxe-server-machine/qemuamd64.yml
 
 machine: qemuamd64
 target: mc:pxe-boot-server:pxe-boot-server

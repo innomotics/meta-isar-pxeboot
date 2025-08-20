@@ -8,3 +8,7 @@ header:
   version: 14
 
 machine: virtualbox
+
+local_conf_header:
+  fstypes: |
+    IMAGE_FSTYPES += "ova ova.xz"

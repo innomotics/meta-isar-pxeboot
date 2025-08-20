@@ -95,6 +95,8 @@ config OVA_MEMORY
 	string "RAM allocated to VM in MiB"
 	default "4096"
 
+endif
+
 config PXESERVER_INTERFACE_NAMES
 	string "Server's interfaces for target devices"
 	default "e*"
@@ -107,7 +109,7 @@ config KAS_PXE_SERVER_IMAGE_PREINSTALL
 	string "Additional packages"
 	default "dhcpcd-base network-manager"
 
-endif
+
 
 if PXE_SERVER_ROOT_USER
 

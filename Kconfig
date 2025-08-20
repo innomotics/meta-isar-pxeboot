@@ -79,9 +79,10 @@ config KAS_INCLUDE_PXE_SERVER_MACHINE
 	default "kas/pxe-server-machine/virtualbox.yml" if PXE_SERVER_VIRTUALBOX
 	default "kas/pxe-server-machine/vmware.yml" if PXE_SERVER_VMWARE
 
-if PXE_SERVER_VIRTUALBOX || PXE_SERVER_VMWARE
 
-comment "Customize PXE Server Image"
+menu "Customize PXE Server Image"	
+
+if PXE_SERVER_VIRTUALBOX || PXE_SERVER_VMWARE
 
 config KAS_INCLUDE_PXE_SERVER_VM_SETTINGS
 	string
@@ -126,6 +127,9 @@ endif
 config KAS_INCLUDE_PXE_SERVER_PACKAGES
 	string
 	default "kas/opt/extra-packages-pxe-server.yml"
+
+endmenu
+
 
 choice
 	prompt "Select Target Machine"

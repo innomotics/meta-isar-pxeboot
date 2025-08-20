@@ -12,11 +12,11 @@ inherit dpkg-raw
 DESCRIPTION = "PXE Server setup to boot devices via pxe boot."
 MAINTAINER = "Alexander Heinisch <alexander.heinisch@siemens.com>"
 
-DEPENDS += " ipxe-efi ipxe-bootfiles-http-server"
+DEPENDS = " ipxe-efi ipxe-bootfiles-http-server"
 DEPENDS:remove:pxe-syslinux = " ipxe-efi ipxe-bootfiles-http-server"
 
-DEBIAN_DEPENDS += "dnsmasq, ipxe-efi, ipxe-bootfiles-http-server"
-DEPENDS:remove:pxe-syslinux = "ipxe-efi, ipxe-bootfiles-http-server"
+DEBIAN_DEPENDS = "dnsmasq, ipxe-efi, ipxe-bootfiles-http-server"
+DEBIAN_DEPENDS:remove:pxe-syslinux = "ipxe-efi, ipxe-bootfiles-http-server"
 
 PXESERVER_INTERFACE_NAMES ?= "e*"
 PXESERVER_IP ?= "192.168.148.42"

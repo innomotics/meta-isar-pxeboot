@@ -16,10 +16,13 @@ variables:
   https_proxy: ${CODE_PROXY}
   http_proxy: ${CODE_PROXY}
   no_proxy: ${CODE_NO_PROXY}
+  BUILD_TAG: unreleased-${CI_COMMIT_SHORT_SHA}-$[[ inputs.snapshot ]]
 
 workflow:
   rules:
     - if: $CI_COMMIT_TAG
+      variables:
+        BUILD_TAG: ${CI_COMMIT_TAG}-$[[ inputs.snapshot ]]
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_REF_NAME == "main"
 
@@ -46,15 +49,37 @@ build-pxe-boot-server-qemuamd64-to-qemuamd64:
     - .kas-build
   variables:
     TARGET: "kas-pxe-boot.yml"
+  artifacts:
+    when: on_success
+    name: "${CI_PROJECT_NAME}_qemuamd64_${BUILD_TAG}"
+    expire_in: "30 days"
+    paths:
+      - build/tmp-pxe-boot-server-*/deploy/images/*/*.wic.xz
+      - build/tmp-pxe-boot-server-*/deploy/images/*/*.manifest
 
 build-pxe-boot-server-virtualbox-to-x86-pc:
   extends:
     - .kas-build
   variables:
     TARGET: "kas-pxe-boot-virtualbox-example.yml"
+  artifacts:
+    when: on_success
+    name: "${CI_PROJECT_NAME}_virtualbox_${BUILD_TAG}"
+    expire_in: "30 days"
+    paths:
+      - build/tmp-pxe-boot-server-*/deploy/images/*/*.ova.xz
+      - build/tmp-pxe-boot-server-*/deploy/images/*/*.manifest
 
 build-pxe-boot-server-vmware-to-x86-pc:
   extends:
     - .kas-build
   variables:
     TARGET: "kas-pxe-boot-vmware-example.yml"
+  artifacts:
+    when: on_success
+    name: "${CI_PROJECT_NAME}_vmware_${BUILD_TAG}"
+    expire_in: "30 days"
+    paths:
+      # Don't store binary artifacts for this build step, as they exceed the size limits
+      #- build/tmp-pxe-boot-server-*/deploy/images/*/*.ova.xz
+      - build/tmp-pxe-boot-server-*/deploy/images/*/*.manifest

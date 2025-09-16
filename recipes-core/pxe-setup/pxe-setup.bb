@@ -43,6 +43,7 @@ TEMPLATE_VARS = "\
 TEMPLATE_FILES = "\
     etc/dnsmasq.conf.tmpl \
     etc/systemd/network/10-main.network.tmpl \
+    postinst.tmpl \
     "
 
 TEMPLATE_FILES:append:ipxe-autoexec = "\
@@ -51,7 +52,7 @@ TEMPLATE_FILES:append:ipxe-autoexec = "\
 
 SRC_URI = "\
     file://preinst \
-    file://postinst \
+    file://postinst.tmpl \
     file://etc/ \
     "
 SRC_URI:append:ipxe-autoexec = "\

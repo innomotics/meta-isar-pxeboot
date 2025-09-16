@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+if [ -f /usr/lib/ipxe/ipxe.efi ]; then
+    ln -s /usr/lib/ipxe/ipxe.efi ${PXESERVER_DHCP_TFTP_ROOT}/${PXESERVER_DHCP_BOOT_FILE}
+fi
+
+systemctl enable systemd-networkd
+
+#DEBHELPER#

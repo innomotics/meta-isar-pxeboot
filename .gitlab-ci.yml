@@ -35,10 +35,10 @@ stages:
   variables:
     GIT_STRATEGY: clone
     GIT_DEPTH: "1"
-    SNAPSHOT: $[[ inputs.snapshot ]]
+    DEBIAN_SNAPSHOT: $[[ inputs.snapshot ]]
   script:
     - build_target="${TARGET}"
-    - if [ "$SNAPSHOT" != "" ];then build_yaml="$build_yaml:kas/opt/use-debian-snapshot.yml"; fi
+    - if [ "$DEBIAN_SNAPSHOT" != "" ];then build_target="$build_target:kas/opt/use-debian-snapshot.yml"; fi
     - echo "Building ${build_target}"
     - kas build ${build_target}
   tags:

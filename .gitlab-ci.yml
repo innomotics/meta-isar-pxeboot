@@ -8,7 +8,7 @@ spec:
   inputs:
     snapshot:
       description: "Set the snapshot date to use for debian packages (e.g.: \"20250507T083647Z\") - leave empty (\"\") to disables snapshots."
-      default: ""
+      default: "20250507T083647Z"
 
 ---
 

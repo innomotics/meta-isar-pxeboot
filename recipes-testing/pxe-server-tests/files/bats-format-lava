@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -e
+trap '' INT
+
+source "/usr/lib/bats-core/formatter.bash"
+
+sanitize_output() {
+  local output=$1
+  output=${output// /_}
+  echo $output
+}
+
+bats_tap_stream_plan() {
+  :
+}
+
+bats_tap_stream_begin() { #<test index> <test name>
+  :
+}
+
+bats_tap_stream_ok() { # [<test index> <test name>
+  printf "<LAVA_SIGNAL_TESTCASE TEST_CASE_ID=%s RESULT=pass>\n" $(sanitize_output "$2")
+}
+
+bats_tap_stream_not_ok() { # <test index> <test name>
+  printf "<LAVA_SIGNAL_TESTCASE TEST_CASE_ID=%s RESULT=fail>\n" $(sanitize_output "$2")
+}
+
+bats_tap_stream_skipped() { # <test index> <test name> <reason>
+  printf "<LAVA_SIGNAL_TESTCASE TEST_CASE_ID=%s RESULT=skip" $(sanitize_output "$2")
+  if [ ! -z "${3}" ]; then
+    printf " MEASUREMENT=0 UNITS=%s" $(sanitize_output "$3")
+  fi
+  printf ">\n"
+}
+
+bats_tap_stream_comment() { # <comment text without leading '# '>
+  printf "# %s\n" "$1"
+}
+
+bats_tap_stream_suite() { # <file name>
+  printf "<LAVA_SIGNAL_TESTSET START ${1#*\/tests\/}>\n"
+}
+
+bats_tap_stream_unknown() { # <full line>
+  :
+}
+
+bats_parse_internal_extended_tap

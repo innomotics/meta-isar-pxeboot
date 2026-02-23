@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# includes the default directory if no path is provided
+if [[ $# -eq 0 || ( ! -f "${!#}" && ! -d "${!#}" ) ]]; then
+    set -- "$@" "//tests"
+fi
+
+/usr/bin/bats --setup-suite-file /tests/setup_suite.bash --trace --verbose-run --timing --recursive ${*}

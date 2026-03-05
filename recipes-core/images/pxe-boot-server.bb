@@ -17,6 +17,7 @@ ROOTFS_PACKAGE_SUFFIX = "${IMAGE_FULLNAME}"
 
 IMAGE_INSTALL += "pxe-setup"
 IMAGE_INSTALL:append:pxe-nfsroot = " nfs-installer-rootfs"
+IMAGE_INSTALL:append:include-tests-pxe-server = " pxe-server-tests"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}:"
 

@@ -136,7 +136,13 @@ config KAS_PXE_SERVER_IMAGE_PREINSTALL
 	string "Additional packages"
 	default "dhcpcd-base network-manager"
 
+config PXE_SERVER_INCLUDE_TESTS
+	bool "Include PXE server tests"
+	default n
 
+config KAS_INCLUDE_PXE_SERVER_INCLUDE_TESTS
+	string
+	default "kas/opt/include-tests-pxe-server.yml" if PXE_SERVER_INCLUDE_TESTS
 
 if PXE_SERVER_ROOT_USER
 

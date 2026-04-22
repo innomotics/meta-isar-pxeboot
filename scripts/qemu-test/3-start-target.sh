@@ -123,6 +123,7 @@ QEMU_NETWORK=" \
     \
     -device virtio-net-pci,netdev=cloud,bus=pcie_port1 \
     \
+	-device virtio-rng-pci \
     -global virtio-net-pci.romfile=${IPXE_ROM_FILE} \
     "
 

@@ -42,11 +42,8 @@ SRC_URI=" \
 SRC_URI:append:ipxe-embedded = "\
     file://embedded-script.ipxe.tmpl \
     "
-SRC_URI:append:ipxe-autoexec = "\
-    file://0001-Fixing-iteration-on-autoexec.ipxe.patch \
-    "
 
-SRCREV_ipxe = "f7a1e9ef8e1dc22ebded786507b872a45e3fb05d"
+SRCREV_ipxe = "1c54e7e8a454f80a77350b52d21ec5ce55ca667b"
 
 PATCHTOOL = "git"
 S = "${WORKDIR}/ipxe-src/src"

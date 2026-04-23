@@ -8,6 +8,5 @@ header:
   version: 14
 
 local_conf_header:
-  use-ipxe-autoexec: |
+  pxe-boot-ipxe-mode: |
     OVERRIDES:append = ":ipxe-autoexec"
-    OVERRIDES:remove = ":ipxe-embedded"

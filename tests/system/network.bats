@@ -3,7 +3,7 @@
 bats_require_minimum_version 1.5.0
 
 setup_file() {
-    run bats_pipe -0 ip -o link show \| awk -F': ' '$2 != "lo" { print $2; exit }' \| cut -d'@' -f1
+    run -0 bats_pipe ip -o link show \| awk -F': ' '$2 != "lo" { print $2; exit }' \| cut -d'@' -f1
     export PRIMARY_INTERFACE="$output"
 }
 
@@ -16,11 +16,11 @@ setup_file() {
 }
 
 @test "loopback interface is up" {
-    run bats_pipe -0 ip link show lo \| grep '<.*UP.*>'
+    run -0 bats_pipe ip link show lo \| grep '<.*UP.*>'
 }
 
 @test "loopback interface has ipv4" {
-    run bats_pipe -0 ip -4 addr show lo \| grep '127.0.0.1/'
+    run -0 bats_pipe ip -4 addr show lo \| grep '127.0.0.1/'
 }
 
 @test "primary interface is present in sysfs" {
@@ -28,9 +28,9 @@ setup_file() {
 }
 
 @test "primary interface is up" {
-    run bats_pipe -0 ip link show "$PRIMARY_INTERFACE" \| grep '<.*UP.*>'
+    run -0 bats_pipe ip link show "$PRIMARY_INTERFACE" \| grep '<.*UP.*>'
 }
 
 @test "primary interface has a route" {
-    run bats_pipe -0 ip route \| grep "dev $PRIMARY_INTERFACE"
+    run -0 bats_pipe ip route \| grep "dev $PRIMARY_INTERFACE"
 }

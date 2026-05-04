@@ -84,17 +84,17 @@ readonly CURL_TIMEOUT_SECONDS="1"
 }
 
 @test "http content for default.ipxe matches local file content" {
-    run bats_pipe -0 curl --max-time "$CURL_TIMEOUT_SECONDS" -fsS "$PXE_HTTP_BASE_URL/default.ipxe" \| \
+    run -0 bats_pipe curl --max-time "$CURL_TIMEOUT_SECONDS" -fsS "$PXE_HTTP_BASE_URL/default.ipxe" \| \
         cmp -s - "$PXE_BOOTFILES_DIR/default.ipxe"
 }
 
 @test "http content for initrd.img matches local file content" {
-    run bats_pipe -0 curl --max-time "$CURL_TIMEOUT_SECONDS" -fsS "$PXE_HTTP_BASE_URL/initrd.img" \| \
+    run -0 bats_pipe curl --max-time "$CURL_TIMEOUT_SECONDS" -fsS "$PXE_HTTP_BASE_URL/initrd.img" \| \
         cmp -s - "$PXE_BOOTFILES_DIR/initrd.img"
 }
 
 @test "http content for vmlinuz matches local file content" {
-    run bats_pipe -0 curl --max-time "$CURL_TIMEOUT_SECONDS" -fsS "$PXE_HTTP_BASE_URL/vmlinuz" \| \
+    run -0 bats_pipe curl --max-time "$CURL_TIMEOUT_SECONDS" -fsS "$PXE_HTTP_BASE_URL/vmlinuz" \| \
         cmp -s - "$PXE_BOOTFILES_DIR/vmlinuz"
 }
 

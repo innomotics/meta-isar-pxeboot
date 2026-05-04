@@ -5,10 +5,10 @@ bats_require_minimum_version 1.5.0
 readonly DNSMASQ_CONFIG_FILE="/etc/dnsmasq.conf"
 
 setup_file() {
-    run bats_pipe -0 sed -n 's/^tftp-root=//p' "$DNSMASQ_CONFIG_FILE" \| head -n1
+    run -0 bats_pipe sed -n 's/^tftp-root=//p' "$DNSMASQ_CONFIG_FILE" \| head -n1
     export TFTP_ROOT="$output"
 
-    run bats_pipe -0 sed -n 's/^dhcp-boot=\([^,]*\).*$/\1/p' "$DNSMASQ_CONFIG_FILE" \| head -n1
+    run -0 bats_pipe sed -n 's/^dhcp-boot=\([^,]*\).*$/\1/p' "$DNSMASQ_CONFIG_FILE" \| head -n1
     export PXE_BOOT_FILE="$output"
 
     TEST_TMPDIR="$(mktemp -d)"

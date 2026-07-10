@@ -1,6 +1,18 @@
+#
+# Copyright (c) Innomotics GmbH, 2026
+#
+# Authors:
+#  Divya Shukla <divya.shukla.ext@innomotics.com>
+#  Lukas Rabener <lukas.rabener@innomotics.com>
+#
+# SPDX-License-Identifier: MIT
+#
+
 inherit dpkg-raw
 
 DESCRIPTION = "PXE Server test suite"
+MAINTAINER = "Lukas Rabener <lukas.rabener@innomotics.com>"
+
 DEBIAN_DEPENDS += "dnsutils, curl"
 
 FILESEXTRAPATHS:prepend := "${LAYERDIR_meta-isar-pxeboot}/:"

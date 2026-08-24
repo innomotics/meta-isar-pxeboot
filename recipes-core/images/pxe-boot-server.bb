@@ -3,6 +3,7 @@
 #
 # Authors:
 #  Alexander Heinisch <alexander.heinisch@siemens.com>
+#  Lukas Rabener <lukas.rabener@innomotics.com>
 #
 # SPDX-License-Identifier: MIT
 #
@@ -31,4 +32,4 @@ IMAGE_PREINSTALL += " \
 
 require ${@bb.utils.contains('ENABLE_ROOT_USER_PXE_SERVER', '1', 'user-setup-root.inc', '', d)}
 
-CUSTOMIZATIONS += "hostname"
+CUSTOMIZATIONS += "hostname sysctl"

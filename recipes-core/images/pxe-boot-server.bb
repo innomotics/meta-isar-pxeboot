@@ -10,7 +10,7 @@
 
 inherit image
 
-ISAR_RELEASE_CMD = "git -C ${LAYERDIR_meta-isar-pxeboot} describe --tags --dirty --always --match 'v[0-9].[0-9]*'"
+ISAR_RELEASE_CMD = "git -C ${LAYERDIR_meta-isar-pxeboot} describe --tags --dirty --always --match '[0-9].[0-9]*'"
 DESCRIPTION = "PXE Boot VM used to bootstrap online installer"
 
 IMAGE_FULLNAME .= "-${PXE_TARGET_MACHINE}"

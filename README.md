@@ -15,10 +15,8 @@ For more technical deep dive you can have a look at [docs/pxe-boot-installer.md]
 To build the PXE Boot Server image (containing the target image to be executed on device) run:
 
 ```
-./build.sh kas-pxe-boot.yml
+./kas-container build kas-pxe-boot.yml
 ```
-
-> Hint: For easier reproducibility you can put exported variables needed for the build in a `.env` file in the local directory or put global settings in `/etc/meta-pxe-boot.env`. The `./build.sh` script will source them before invoking the build.
 
 > **Note:** If you want to build without using containers you can follow the instructions to setup the isar build dependencies here: https://github.com/ilbers/isar/blob/master/doc/user_manual.md#getting-started
 >

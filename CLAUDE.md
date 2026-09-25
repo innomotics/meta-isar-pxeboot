@@ -32,7 +32,6 @@ Reference docs:
 | `isar/` | Git submodule — upstream Isar framework (pinned commit, see below) |
 | `Kconfig` | Interactive build config menu (`kas menu`) |
 | `docs/` | User quickstart, technical deep-dive, architecture assets |
-| `build.sh` | Wrapper around `kas-container build` |
 
 ---
 
@@ -47,23 +46,17 @@ Reference docs:
 
 ```bash
 # Default build (QEMU AMD64 server + QEMU target)
-./build.sh kas-pxe-boot.yml
+./kas-container build kas-pxe-boot.yml
 
 # VirtualBox OVA
-./build.sh kas-pxe-boot-virtualbox-example.yml
+./kas-container build kas-pxe-boot-virtualbox-example.yml
 
 # VMware OVA
-./build.sh kas-pxe-boot-vmware-example.yml
+./kas-container build kas-pxe-boot-vmware-example.yml
 
 # Interactive config (uses Kconfig)
 ./kas-container menu
 ```
-
-### Environment
-
-Put build-time env vars in `.env` (local) or `/etc/meta-pxe-boot.env` (global). `build.sh` sources both before invoking kas.
-
-The `kas-container` image version is pinned in `build.sh` via `KAS_IMAGE_VERSION="4.7"`. Do not change this without testing.
 
 ### Build Output
 
@@ -93,7 +86,7 @@ The build produces two images coordinated via BitBake multiconfig:
 
 ```bash
 # 1. Build
-./build.sh kas-pxe-boot.yml
+./kas-container build kas-pxe-boot.yml
 
 # 2. Set up a bridge network for QEMU
 ./scripts/qemu-test/1-setup-network.sh

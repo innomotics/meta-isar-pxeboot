@@ -34,7 +34,9 @@ To build the PXE Boot Server image (containing the target image to be executed o
 
 To improve build times by using cached upstream apt artifacts you can setup an apt cache as described in [docs/setup-build-env/apt-caching-proxy.md](docs/setup-build-env/apt-caching-proxy.md).
 
-## Test Setup
+## Testing
+
+### System Test Setup
 
 1. Configure a local bridge network used for the pxe-boot setup:
 
@@ -59,3 +61,21 @@ To improve build times by using cached upstream apt artifacts you can setup an a
     ```
     ./scripts/qemu-test/4-remove-network.sh
     ```
+
+### Automated On-Device bats Tests
+
+The bats test files in `tests/` can be included to the PXE server enabling `PXE_SERVER_INCLUDE_TESTS` in Kconfig or
+by adding `kas/opt/include-tests-pxe-server.yml` to `./kas-container build ...` invokation.
+
+```
+./kas-container build kas-pxe-boot.yml:kas/opt/include-tests-pxe-server.yml
+```
+
+Once the image is running, SSH in and execute:
+
+```bash
+run_tests               # TAP output
+run_tests_debug         # verbose output (failing tests only)
+run_tests_debug_all     # verbose output (all tests)
+run_tests_lava          # LAVA-formatted output
+```

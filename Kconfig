@@ -50,7 +50,7 @@ if USE_SNAPSHOT_FEEDS
 
 config DEBIAN_SNAPSHOT
 	string "Debian snapshot timestamp"
-	default "20250507T083647Z"
+	default "20260925T143544Z"
 
 config KAS_INCLUDE_USE_DEBIAN_SNAPSHOT
 	string

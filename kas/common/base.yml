@@ -21,7 +21,7 @@ repos:
   meta-isar-pxeboot:
   isar:
     url: https://github.com/ilbers/isar.git
-    commit: 9e62337953fbb8371c846c44e8a99d62a8d220ba
+    commit: d8a42c3ad4a68276012f68242b7edbb779de8f39
     layers:
       meta:
       meta-isar:

@@ -80,6 +80,17 @@ run_tests_debug_all     # verbose output (all tests)
 run_tests_lava          # LAVA-formatted output
 ```
 
+## Contributing
+
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the
+contribution process and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for the
+expected conduct. Security issues must be reported as described in
+[SECURITY.md](SECURITY.md). For questions, see [SUPPORT.md](SUPPORT.md).
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 ## Credits
 
 * Developed by Innomotics GmbH & Siemens AG

@@ -1,4 +1,12 @@
 #!/bin/bash
+#
+# Copyright (c) Innomotics GmbH, 2026
+#
+# Authors:
+#  Divya Shukla <divya.shukla.ext@innomotics.com>
+#
+# SPDX-License-Identifier: MIT
+#
 
 # includes the default directory if no path is provided
 if [[ $# -eq 0 || ( ! -f "${!#}" && ! -d "${!#}" ) ]]; then

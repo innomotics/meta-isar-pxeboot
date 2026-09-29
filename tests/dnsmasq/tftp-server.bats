@@ -1,4 +1,12 @@
 #!/usr/bin/env bats
+#
+# Copyright (c) Innomotics GmbH, 2026
+#
+# Authors:
+#  Divya Shukla <divya.shukla.ext@innomotics.com>
+#
+# SPDX-License-Identifier: MIT
+#
 
 bats_require_minimum_version 1.5.0
 

@@ -1,5 +1,6 @@
 #
 # Copyright (c) Siemens AG, 2025
+# Copyright (c) Innomotics GmbH, 2025
 #
 # Authors:
 #  Alexander Heinisch <alexander.heinisch@siemens.com>

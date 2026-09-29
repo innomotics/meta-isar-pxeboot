@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+#
+# Copyright (c) Innomotics GmbH, 2026
+#
+# Authors:
+#  Divya Shukla <divya.shukla.ext@innomotics.com>
+#
+# SPDX-License-Identifier: MIT
+#
 
 readonly PXE_NS="pxe-client"
 readonly PXE_SERVER_IF="veth-pxe-server"

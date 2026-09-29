@@ -79,3 +79,8 @@ run_tests_debug         # verbose output (failing tests only)
 run_tests_debug_all     # verbose output (all tests)
 run_tests_lava          # LAVA-formatted output
 ```
+
+## Credits
+
+* Developed by Innomotics GmbH & Siemens AG
+* Sponsored by Innomotics GmbH

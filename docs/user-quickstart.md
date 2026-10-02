@@ -11,7 +11,7 @@
     > Note: we are using `vmware` as target as well. Feel free to change that to your target `MACHINE`
 
     ```
-    PXE_TARGET_MACHINE="vmware" kas build .yaml
+    PXE_TARGET_MACHINE="vmware" kas build kas-pxe-boot.yml
     ```
 
 1. Open the image `build/tmp-pxe-boot-server-vmware/deploy/images/vmware/pxe-boot-server-debian-bookworm-vmware.ova`

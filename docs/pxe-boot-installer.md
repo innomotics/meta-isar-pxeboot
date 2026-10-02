@@ -51,7 +51,7 @@ In cases where ipxe does not work `syslinux.efi` bootstrapping can be configured
 ## Build
 
 ```
-PXE_TARGET_MACHINE="<your-machine>" kas build .yaml
+PXE_TARGET_MACHINE="<your-machine>" kas build kas-pxe-boot.yml
 ```
 
 Set the `MACHINE` of your desired target in `PXE_TARGET_MACHINE`.
